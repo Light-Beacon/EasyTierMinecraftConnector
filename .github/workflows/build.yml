@@ -34,7 +34,7 @@ jobs:
     - name: Build executable with PyInstaller
       run: |
         mkdir -p dist
-        pyinstaller --onefile src/main.py
+        pyinstaller --onefile src/EasytierMinecraftConnector/main.py
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
