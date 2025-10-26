@@ -83,8 +83,14 @@ class EasyTierInstaller:
         url = cls.generate_download_link()
         logger.info("下载链接: %s", url)
         print("正在下载...请稍后")
-        response = requests.get(url, stream=True, timeout=10)
-        total_size = int(response.headers.get('content-length', 0))
+        try:
+            response = requests.get(url, stream=True, timeout=10)
+            response.raise_for_status()
+        except requests.RequestException:
+            url = cls.generate_download_link(use_mirror=True)
+            logger.warning("使用镜像下载 EasyTier: %s", url)
+            response = requests.get(url, stream=True, timeout=10)
+        #total_size = int(response.headers.get('content-length', 0))
         with open("easytier.zip", "wb") as f:
             f.write(response.content)
             #for data in tqdm(response.iter_content(chunk_size=1024), position=0, total=total_size // 1024, unit="KB"):
