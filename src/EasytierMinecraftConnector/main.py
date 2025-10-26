@@ -1,9 +1,13 @@
-from core.connectors.pcl import PCLConnector
-from core.easytier import EasyTier
+from EasytierMinecraftConnector.core.connectors.pcl import PCLConnector
+from EasytierMinecraftConnector.core.easytier import EasyTier
 
 if __name__ == "__main__":
     easytier = EasyTier()
-    invite_code = input("请输入 PCL 邀请码: ").strip()
+    try:
+        invite_code = input("请输入 PCL 邀请码: ").strip()
+    except KeyboardInterrupt:
+        print("\n操作已取消。")
+        exit(0)
     if not PCLConnector.verify_invite_code(invite_code):
         print("无效的 PCL 邀请码格式！")
         exit(1)
@@ -15,5 +19,6 @@ if __name__ == "__main__":
             if cmd.lower() == 'exit':
                 break
         except KeyboardInterrupt:
+            print("")
             break
     connector.disconnect()

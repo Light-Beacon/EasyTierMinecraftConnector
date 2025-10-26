@@ -7,7 +7,7 @@ import subprocess
 import time
 from subprocess import DEVNULL
 from pathlib import Path
-from tqdm import tqdm
+#from tqdm import tqdm
 import stat
 
 
@@ -81,12 +81,13 @@ class EasyTierInstaller:
         """下载 EasyTier"""
         url = cls.generate_download_link()
         logger.info("下载链接: %s", url)
-        logger.info("正在下载...请稍后")
+        print("正在下载...请稍后")
         response = requests.get(url, stream=True, timeout=10)
         total_size = int(response.headers.get('content-length', 0))
         with open("easytier.zip", "wb") as f:
-            for data in tqdm(response.iter_content(chunk_size=1024), total=total_size // 1024, unit="KB"):
-                f.write(data)
+            f.write(response.content)
+            #for data in tqdm(response.iter_content(chunk_size=1024), position=0, total=total_size // 1024, unit="KB"):
+            #    f.write(data)
         logger.info("下载完成！")
 
     @classmethod

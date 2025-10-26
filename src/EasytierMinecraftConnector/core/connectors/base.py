@@ -7,7 +7,10 @@ class EasyTierConnector:
         self.connected = False
 
     def connect(self):
-        print("Connecting to EasyTier with invite code:", self.invite_code)
+        raise NotImplementedError()
+
+    def disconnect(self):
+        raise NotImplementedError()
 
 class InvalidInviteCodeError(Exception):
     pass
