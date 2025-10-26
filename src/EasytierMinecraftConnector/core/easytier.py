@@ -17,6 +17,7 @@ logger = logging.getLogger(__name__)
 DOWNLOAD_PLATFORM_STRS = {
     ("windows", "x86_64"): "windows-x86_64",
     ("windows", "arm64"): "windows-arm64",
+    ("windows", "amd64"): "windows-arm64",
     ("windows", "i686"): "windows-i686",
     ("linux", "x86_64"): "linux-x86_64",
     ("linux", "aarch64"): "linux-aarch64",
