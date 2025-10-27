@@ -26,9 +26,16 @@ class PCLConnector(EasyTierConnector):
 
     def connect(self):
         arguments = [
+            "-d",
             "-p",
             "tcp://public2.easytier.cn:54321",
             "--encryption-algorithm=chacha20",
+            "--enable-kcp-proxy",
+            "--use-smoltcp",
+            "--no-tun",
+            "--compression=zstd",
+            "--multi-thread",
+            "--latency-first",
             f"--network-name={self.network_name}",
             f"--network-secret={self.secret}",
             f"--hostname=Client-{random.randint(1000,9999)}",
