@@ -14,6 +14,7 @@ class PCLConnector(EasyTierConnector):
         return re.match(cls.__PATTERN, invite_code) is not None
     
     def __init__(self, easytier: EasyTier, invite_code: str):
+        invite_code = invite_code.upper().replace('O', '0').replace('I','1')
         super().__init__(easytier, invite_code)
         matchobj = re.match(self.__PATTERN, self.invite_code)
         if matchobj is None:
@@ -29,6 +30,12 @@ class PCLConnector(EasyTierConnector):
             "-d",
             "-p",
             "tcp://public2.easytier.cn:54321",
+            "-p",
+            "tcp://101.42.154.32:55558",
+            "-p",
+            "tcp://turn.hn.629957.xyz:14443",
+            "-p",
+            "tcp://119.45.189.143:11010",
             "--encryption-algorithm=chacha20",
             "--enable-kcp-proxy",
             "--use-smoltcp",
